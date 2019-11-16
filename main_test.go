@@ -37,13 +37,20 @@ func Test_Main(t *testing.T) {
 		req.NoError(err)
 
 		tempFile.Write([]byte(tt.command))
-		os.Args = []string{"", tempFile.Name()}
-		out := capturer.CaptureStdout(func() {
-			r, w, _ := os.Pipe()
-			os.Stdin = r
-			fmt.Fprint(w, tt.stdin)
-			main()
-		})
-		req.Equal(tt.output, out)
+
+		argss := [][]string{
+			{tempFile.Name()},
+			{"-c", tt.command},
+		}
+		for _, args := range argss {
+			os.Args = append([]string{""}, args...)
+			out := capturer.CaptureStdout(func() {
+				r, w, _ := os.Pipe()
+				os.Stdin = r
+				fmt.Fprint(w, tt.stdin)
+				main()
+			})
+			req.Equal(tt.output, out)
+		}
 	}
 }

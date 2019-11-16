@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -22,12 +23,20 @@ func (s *peekStack) Pop() int {
 	return val
 }
 
-func main() {
-	file := os.Args[1]
-	content, _ := ioutil.ReadFile(file)
-	code := string(content)
+const cellAmount = 30000
 
-	var memory [30000]uint8
+func main() {
+	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+	c := flag.String("c", "", "brainfuck code to be interpreted")
+	flag.Parse()
+	if *c == "" {
+		file := os.Args[1]
+		content, _ := ioutil.ReadFile(file)
+		*c = string(content)
+	}
+	code := *c
+
+	var memory [cellAmount]uint8
 	var pointer uint
 	var loops peekStack
 	var skippingLoop int
@@ -47,14 +56,14 @@ func main() {
 		case '<':
 			if skippingLoop == 0 {
 				if pointer == 0 {
-					pointer = 29999
+					pointer = cellAmount - 1
 				} else {
 					pointer--
 				}
 			}
 		case '>':
 			if skippingLoop == 0 {
-				if pointer == 29999 {
+				if pointer == cellAmount-1 {
 					pointer = 0
 				} else {
 					pointer++
