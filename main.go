@@ -22,8 +22,6 @@ func (s *peekStack) Pop() int {
 	return val
 }
 
-
-
 func main() {
 	file := os.Args[1]
 	content, _ := ioutil.ReadFile(file)
