@@ -1,5 +1,7 @@
 # brainfuck
 
+![](https://github.com/shilangyu/brainfuck/workflows/Brainfuck/badge.svg)
+
 Extremely primitive brainfuck interpreter
 
 Flavor:
