@@ -1,6 +1,6 @@
 # brainfuck
 
-![](https://github.com/shilangyu/brainfuck/workflows/Brainfuck/badge.svg)
+[![](https://github.com/shilangyu/brainfuck/workflows/Brainfuck/badge.svg)](https://github.com/shilangyu/brainfuck/actions)
 
 Extremely primitive brainfuck interpreter
 
