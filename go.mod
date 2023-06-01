@@ -1,6 +1,6 @@
 module github.com/shilangyu/brainfuck
 
-go 1.13
+go 1.20
 
 require (
 	github.com/kami-zh/go-capturer v0.0.0-20171211120116-e492ea43421d
